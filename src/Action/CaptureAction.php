@@ -70,6 +70,11 @@ final class CaptureAction implements ActionInterface, ApiAwareInterface, Gateway
             return;
         }
 
+        if (isset($details['payment-link'])) {
+            // Compatibility with Sylius/AdminOrderCreationPlugin
+            unset($details['payment-link']);
+        }
+
         if (isset($details['status'], $details['payment_id'])) {
             if (PayPlugApiClientInterface::STATUS_CREATED !== $details['status']) {
                 return;
